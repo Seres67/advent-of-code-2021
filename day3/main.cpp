@@ -65,24 +65,14 @@ int part2(const std::vector<std::string> &vals)
     {
         common = mostCommonBitAtPos(j, oxygen_values);
         int common1 = mostCommonBitAtPos(j, co2_values);
-        for (auto i = oxygen_values.begin(); i != oxygen_values.end();)
+        oxygen_values.erase(std::remove_if(oxygen_values.begin(), oxygen_values.end(), [common, j](std::string str)
         {
-            if (oxygen_values.size() == 1)
-                break;
-            if ((*i)[j] != common)
-                i = oxygen_values.erase(i);
-            else
-                ++i;
-        }
-        for (auto i = co2_values.begin(); i != co2_values.end();)
+            return str[j] != common;
+        }), oxygen_values.end());
+        co2_values.erase(std::remove_if(co2_values.begin(), co2_values.end(), [common1, j](std::string str)
         {
-            if (co2_values.size() == 1)
-                break;
-            if ((*i)[j] == common1)
-                i = co2_values.erase(i);
-            else
-                ++i;
-        }
+            return str[j] != common1;
+        }), co2_values.end());
         if (oxygen_values.size() == 1 && co2_values.size() == 1)
             break;
     }
