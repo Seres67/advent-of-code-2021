@@ -3,7 +3,6 @@
 //
 
 #include <iostream>
-#include <bitset>
 #include "Utils.hpp"
 
 int mostCommonBitAtPos(int pos, const std::vector<std::string> &vals)
