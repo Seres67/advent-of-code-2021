@@ -154,10 +154,11 @@ int part2(std::vector<std::string> vals)
     {
         for (int i = 0; i < boards.size() && !stop; ++i)
         {
+            for (auto &j: boards[i])
+                if (j.nb == val)
+                    j.checked = true;
             for (int j = 0; j < boards[i].size() && !stop; ++j)
             {
-                if (boards[i][j].nb == val)
-                    boards[i][j].checked = true;
                 if (std::none_of(wins.begin(), wins.end(), [i](int a)
                 { return i / 5 == a; }))
                 {
