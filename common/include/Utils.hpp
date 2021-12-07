@@ -11,7 +11,7 @@
 class Utils
 {
 public:
-    static std::vector<std::string> get_input(std::string filename);
+    static std::vector<std::string> readFile(const std::string &fileName);
 };
 
 
