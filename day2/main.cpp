@@ -5,21 +5,21 @@
 #include <iostream>
 #include "Utils.hpp"
 
-void forward(int *pos, int *depth, int aim, int i)
+void forward(int &pos, int &depth, int aim, int i)
 {
-    *pos += i;
-    *depth += aim * i;
+    pos += i;
+    depth += aim * i;
 }
 
-void down(int *depth, int i)
+void down(int &depth, int i)
 {
 
-    *depth += i;
+    depth += i;
 }
 
-void up(int *depth, int i)
+void up(int &depth, int i)
 {
-    *depth -= i;
+    depth -= i;
 }
 
 int part1(const std::vector<std::string> &vals)
@@ -33,11 +33,11 @@ int part1(const std::vector<std::string> &vals)
         int value = std::stoi(i.substr(i.find(' '), std::string::npos));
 
         if (i.rfind("forward", 0) == 0)
-            forward(&pos, &dummy, 0, value);
+            forward(pos, dummy, 0, value);
         else if (i.rfind("down", 0) == 0)
-            down(&depth, value);
+            down(depth, value);
         else if (i.rfind("up") == 0)
-            up(&depth, value);
+            up(depth, value);
     }
     return depth * pos;
 }
@@ -53,11 +53,11 @@ int part2(const std::vector<std::string> &vals)
         int value = std::stoi(i.substr(i.find(' '), std::string::npos));
 
         if (i.rfind("forward", 0) == 0)
-            forward(&pos, &depth, aim, value);
+            forward(pos, depth, aim, value);
         else if (i.rfind("down", 0) == 0)
-            down(&aim, value);
+            down(aim, value);
         else if (i.rfind("up") == 0)
-            up(&aim, value);
+            up(aim, value);
     }
     return depth * pos;
 }
