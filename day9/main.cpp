@@ -7,6 +7,7 @@
 #include <numeric>
 #include <queue>
 #include <unordered_set>
+#include <execution>
 #include "Utils.hpp"
 
 struct pos_s
@@ -97,7 +98,7 @@ int part2(std::vector<std::vector<int>> &input)
         }
         sizes.emplace_back(count + 1);
     }
-    std::sort(std::begin(sizes), std::end(sizes));
+    std::sort(std::execution::par,std::begin(sizes), std::end(sizes));
     return sizes[sizes.size() - 1] * sizes[sizes.size() - 2] * sizes[sizes.size() - 3];
 }
 

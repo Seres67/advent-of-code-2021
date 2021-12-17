@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <execution>
 #include "Utils.hpp"
 
 int part1(const std::vector<std::vector<std::string>> &signals, const std::vector<std::vector<std::string>> &output)
@@ -110,7 +111,7 @@ void findNumber(std::string &output, const std::string &toRemove, std::string in
 void compute(int i, int &j, std::vector<std::vector<std::string>> &input, std::map<int, std::string> &numbers, std::map<int, std::string> &segments)
 {
     std::string tmp = input[i][j];
-    std::sort(tmp.begin(), tmp.end());
+    std::sort(std::execution::par, tmp.begin(), tmp.end());
     if (tmp.size() == 2 && numbers[1].empty())
     {
         numbers[1] = tmp;
@@ -139,13 +140,13 @@ void compute2(int i, std::vector<std::vector<std::string>> &input, std::map<int,
 {
     for (auto tmp: input[i])
     {
-        std::sort(tmp.begin(), tmp.end());
+        std::sort(std::execution::par, tmp.begin(), tmp.end());
         if (tmp.size() == 5 && !numbers[4].empty() && !numbers[7].empty())
             findNumber(numbers[2], tmp, numbers[4], numbers[7], 2);
     }
     for (auto tmp: input[i])
     {
-        std::sort(tmp.begin(), tmp.end());
+        std::sort(std::execution::par, tmp.begin(), tmp.end());
         if (tmp.size() == 5 && !numbers[2].empty() && std::strcmp(tmp.c_str(), numbers[2].c_str()) != 0)
             findNumber(numbers[3], tmp, numbers[2], 1);
         if (tmp.size() == 5 && !numbers[2].empty() && std::strcmp(tmp.c_str(), numbers[2].c_str()) != 0)
@@ -166,7 +167,7 @@ int computeCount(const std::map<int, std::string> &numbers, std::vector<std::str
     std::string tmp;
     for (auto digit: output)
     {
-        std::sort(digit.begin(), digit.end());
+        std::sort(std::execution::par, digit.begin(), digit.end());
         tmp += std::to_string(digitToNb(numbers, digit));
     }
     return std::stoi(tmp);

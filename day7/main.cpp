@@ -7,11 +7,12 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <execution>
 #include "Utils.hpp"
 
 int part1(std::vector<int> &vals)
 {
-    std::sort(vals.begin(), vals.end());
+    std::sort(std::execution::par, vals.begin(), vals.end());
     double moveTo = (vals[(vals.size() - 1) / 2] + vals[vals.size() / 2]) / 2.0;
     int count = 0;
 
@@ -22,7 +23,7 @@ int part1(std::vector<int> &vals)
 
 long long part2(std::vector<int> &vals)
 {
-    std::sort(vals.begin(), vals.end());
+    std::sort(std::execution::par,vals.begin(), vals.end());
     double moveTo = std::accumulate(vals.begin(), vals.end(), (int) 0) / double(vals.size());
     int count = 0;
 

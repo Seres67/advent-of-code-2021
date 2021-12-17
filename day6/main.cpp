@@ -5,6 +5,7 @@
 #include <iostream>
 #include <array>
 #include <numeric>
+#include <execution>
 #include "Utils.hpp"
 
 int part1(const std::vector<int> &vals)
@@ -17,7 +18,7 @@ int part1(const std::vector<int> &vals)
     for (int i = 0; i < 80; ++i)
     {
         tmp = states[0];
-        std::rotate(states.begin(), states.begin() + 1, states.end());
+        std::rotate(std::execution::par, states.begin(), states.begin() + 1, states.end());
         states[6] += tmp;
     }
     return std::accumulate(states.begin(), states.end(), 0);
@@ -33,10 +34,10 @@ long long part2(const std::vector<int> &vals)
     for (int i = 0; i < 256; ++i)
     {
         tmp = states[0];
-        std::rotate(states.begin(), states.begin() + 1, states.end());
+        std::rotate(std::execution::par, states.begin(), states.begin() + 1, states.end());
         states[6] += tmp;
     }
-    return std::accumulate(states.begin(), states.end(), (long long)0);
+    return std::accumulate(states.begin(), states.end(), (long long) 0);
 }
 
 int main()
